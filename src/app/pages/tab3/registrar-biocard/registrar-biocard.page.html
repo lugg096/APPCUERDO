@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="myBackButton()" color="light">
+      <ion-icon name="arrow-back-outline" color="lite"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="parrafo" style="height: 120px" >
+    <p class="text-parrafo-1">Datos de BIOCard</p>
+    <p class="titulo-parrafo mt-2">Ingresar Datos</p>
+    <p class="text-parrafo-2">Completa el formulario y recuerda que todos los datos <br>son obligatorios.</p>
+  </div>
+
+  <div class="p-3">
+  <ion-item lines="none">
+    <ion-label position="floating" class="text-label ion-text-wrap">{{nonceTitle}}</ion-label>
+    <ion-input type="text" id="nonceF" #nonceF="ngModel" [(ngModel)]="nonce" required></ion-input>
+    <div *ngIf="inValidString(nonce) && !nonceF.untouched && nonceF.valid">
+      <span style="font-size: 12px; color: #eb445a;">
+        <ion-icon name="alert-circle-outline"></ion-icon>Dato es invalido
+      </span>
+    </div>
+    <div class="md-errors-spacer" [hidden]="nonceF.valid || nonceF.untouched">
+      <div *ngIf="nonceF.errors && nonceF.errors.required">
+        <span style="font-size: 12px; color: #eb445a;">
+          <ion-icon name="alert-circle-outline"></ion-icon> Dato es requerido
+        </span>
+      </div>
+    </div>
+  </ion-item>
+  <hr class="line" >
+
+
+  <ion-item lines="none">
+    <ion-label position="floating" class="text-label ion-text-wrap">{{valueTitle}}</ion-label>
+    <ion-input type="text" id="valueF" #valueF="ngModel" [(ngModel)]="value" required></ion-input>
+    <div *ngIf="inValidString(value) && !valueF.untouched && valueF.valid">
+      <span style="font-size: 12px; color: #eb445a;">
+        <ion-icon value="alert-circle-outline"></ion-icon> Dato es invalido
+      </span>
+    </div>
+    <div class="md-errors-spacer" [hidden]="valueF.valid || valueF.untouched">
+      <div *ngIf="valueF.errors && valueF.errors.required">
+        <span style="font-size: 12px; color: #eb445a;">
+          <ion-icon value="alert-circle-outline"></ion-icon> Dato es requerido
+        </span>
+      </div>
+    </div>
+  </ion-item>
+  <hr class="line" >
+</div>
+
+</ion-content>
+
+<ion-footer line="none"  class="ion-no-border text-center ion-padding">
+  <ion-button class="boton-continuar" (click)="verificar()" [disabled]="campoInvalidos()" >Continuar</ion-button>
+</ion-footer>

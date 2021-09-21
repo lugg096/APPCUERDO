@@ -1,0 +1,18 @@
+<ion-content>
+  
+  <ion-item class="close-fake" lines="none">
+    <ion-button slot="start" fill="clear" color="light" (click)="closeModal()">
+      <ion-icon name="arrow-back-outline" color="light" style="font-size: 22px;"></ion-icon> <span
+        style="text-transform: capitalize; margin-left: 20px; font-size: 16px;"> Foto de perfil</span>
+    </ion-button>
+  </ion-item>
+
+  <ion-slides [options]="sliderOpts" #slider>
+    <ion-slide>
+      <div class="swiper-zoom-container">
+        <img [src]="img">
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

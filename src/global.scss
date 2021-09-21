@@ -1,0 +1,89 @@
+/*===== GOOGLE FONTS =====*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+.aler-imgDidUser {
+  .alert-message {
+    max-height: 340px
+  }
+
+  .alert-button-inner {
+    color: var(--main-color);
+  }
+
+  .imgUser {
+    height: 190px
+  }
+
+  .text-data {
+    font-size: 11px;
+  }
+}
+
+
+.alert-validar {
+  .imgIcon {
+    height: 70px
+  }
+
+  .alert-message {
+    max-height: 295px
+  }
+
+  .alert-button-inner {
+    margin: auto;
+    color: var(--main-color);
+  }
+
+  .colorPregunta {
+    color: var(--main-color);
+  }
+
+}
+
+.active-item {
+  ion-label {
+    color: #044483 !important;
+  }
+
+  --background: rgb(17, 77, 137);
+  --background: linear-gradient(86deg, rgba(17, 77, 137, 0.19373219373219375) 0%, rgba(255, 255, 255, 0) 100%);
+
+}
+
+.menu-content-open {
+  transition: .2s;
+}
+
+.ion-page {
+  transition: .12s;
+}
+
+.menu-content-open>.ion-page {
+  transform: scale(0.8);
+  transition: .1s;/* 
+  border-radius: 20px; */
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+  ;
+}
+
+
+.menu-content-push {
+  box-shadow: none !important;
+}

@@ -1,0 +1,325 @@
+  <div class=" text-left" style="height: 100%; width: 100%;background: var(--main-color);" *ngIf="load">
+    <ion-button fill="clear" [routerLink]="['/app/inicio']" class="pt-3">
+      <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+    </ion-button>
+
+    <div style="padding-bottom: 5px; padding-top: 80px;" class="text-center">
+      <ion-spinner name="crescent" color="light" style="height: 60px;width: 60px; margin-top: 130px;"></ion-spinner>
+      <br>
+      <p style="font-size: 15px;color: white;">Por favor espere</p>
+    </div>
+  </div>
+
+  <ion-content>
+
+    <ion-slides #slidesPadre pager="false" [options]="slideOptsOnboarding" style="height: 100%;">
+
+      <!-- VER DOCUMENTO -->
+      <ion-slide>
+        <div class="row text-left" style="height: 100%; width: 100%;">
+          <ion-content>
+            <div style="background: var(--main-color);">
+              <ion-button fill="clear" [routerLink]="['/app/inicio']" class="pt-3">
+                <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+              </ion-button>
+            </div>
+            <div class="parrafo pt-0 mt-0 px-3">
+              <p class="text-right my-0 py-0" style="font-size: 12px;color: rgba(255, 255, 255, 0.755);"><small>Creado
+                  el {{dataFireBase.timestamp | date :'mediumDate'}}</small></p>
+
+
+              <p class="text-parrafo-1 mb-0 mt-1"> ¿Estas de acuerdo en firmar este documento? </p>
+              <p class=" mt-1 mb-1" style="color: white;font-size: 20px;line-height: 1.1;">{{dataFireBase.filetitle}}
+              </p>
+              <p class="mb-0" style="font-size: 11px;color: rgba(255, 255, 255, 0.755);"> Revisa el documento antes de
+                continuar </p>
+            </div>
+
+            <div class=" text-left identificacion" style=" width: 100%;">
+              <ion-item style="--background: #fff;width: 100%; " lines="none">
+                <ion-avatar slot="start" class="ion-no-padding text-center mt-2" style="height: 43px; width: 43px;">
+                  <img [src]="dataFireBase.creatoricon" style="height: 43px; width: 43px; margin: auto;">
+                </ion-avatar>
+                <ion-label style="line-height: 16px;">
+                  <small style="color: darkgrey;">Creador</small>
+                  <ion-row class=" ion-no-padding ">
+                    <ion-col class="ion-no-padding">
+                      <b style="font-size: 13px; color: rgba(0, 0, 0, 0.768);">{{dataFireBase.creatorname}}</b>
+                    </ion-col>
+                  </ion-row>
+                </ion-label>
+              </ion-item>
+
+              <div class="text-center" style=" width: 100%;">
+                <div class="ml-0 pl-0 text-center">
+                  <ion-button size="small" class="button-valid-identidad mx-2"
+                    style="width: 100px;height: 30px; font-size: 11px;" [href]="dataFireBase.fileurl">
+                    Ver documento</ion-button>
+                </div>
+                <div style="margin-top: 10px;">
+                  <img [src]="dataFireBase.fileimg"
+                    style="width: 260px;height: auto;filter: drop-shadow(1px 3px 6px rgb(174, 174, 174))">
+                </div>
+              </div>
+            </div>
+
+            <ion-footer line="none" class="ion-no-border text-center">
+              <div class="row px-3 fondo-opciones" style="height: 80px;">
+                <div class="col-6 px-0 py-0">
+                  <ion-tab-button [routerLink]="['/app/inicio']">
+                    <ion-icon class="icon-tab-button" name="close-circle-outline"></ion-icon>
+                    <ion-label class="icon-tab-label">Cancelar</ion-label>
+                  </ion-tab-button>
+                </div>
+                <div class="col-6 px-0 py-0">
+                  <ion-tab-button (click)="nextSlidePadre()">
+                    <ion-icon class="icon-tab-button" name="chevron-forward-circle-outline"></ion-icon>
+                    <ion-label class="icon-tab-label">Aceptar</ion-label>
+                  </ion-tab-button>
+                </div>
+              </div>
+            </ion-footer>
+
+          </ion-content>
+        </div>
+
+
+      </ion-slide>
+
+
+      <!-- Escanear BIOCARD -->
+      <ion-slide *ngIf="solicitarPk">
+        <div class="row text-left" style="height: 100%; width: 100%;">
+          <ion-content>
+            <div style="background: var(--main-color);">
+              <ion-button fill="clear" (click)="backSlidePadre()" class="pt-3">
+                <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div class="parrafo">
+              <p class="text-parrafo-1">Triple seguridad</p>
+              <p class="titulo-parrafo mt-2">BIOCard</p>
+              <p class="text-parrafo-2">Es necesario tener la BIOCard emitida por la entidad para validar su identidad
+              </p>
+            </div>
+
+            <ion-item *ngIf="servidorCard!=null" lines="none">
+
+              <ion-thumbnail slot="start" class="ion-no-padding">
+                <img [src]="servidorCard.icon" style="filter: drop-shadow(1px 1px 2px rgb(133, 133, 133))">
+              </ion-thumbnail>
+
+              <ion-label style="line-height: 17px;">
+                <ion-row class="ion-no-margin ion-no-padding">
+                  <ion-col class="ion-no-margin ion-no-padding">
+                    <b style="font-size: 15px; color: rgba(0, 0, 0, 0.768);">{{servidorCard.value}}</b>
+                  </ion-col>
+                  <ion-col class="ion-no-margin ion-no-padding">
+                    <p class="text-right my-0 py-0" style="font-size: 11px;color: darkgrey;"><small
+                        style="color: darkgrey;">Exp. {{servidorCard.expirationdate | date :'mediumDate'}}</small></p>
+                  </ion-col>
+                </ion-row>
+
+                <small style="color: darkgrey;">Emitido por {{servidorCard.name}}</small>
+
+              </ion-label>
+            </ion-item>
+
+            <div class="text-center mt-3">
+              <img src="../../../assets/images/imageBiocard.png" style="height: auto;width: 380px;">
+              <img src="../../../assets/images/textScanBiocard.png" style="height: auto;width: 300px;">
+              <p style="font-size: 12px;" class="mt-3 mb-2">Escanea el código QR encontrado <br> en su BIOCard</p>
+              <ion-button class="boton-continuar" (click)="scanBIOCard()"
+                [disabled]="formInvalid && camposFormulario.length!=0">Escanear</ion-button>
+            </div>
+
+
+          </ion-content>
+        </div>
+      </ion-slide>
+
+
+      <!-- Compartir datos -->
+      <ion-slide *ngIf="dataFireBase.datarequest!=''">
+        <div class="row text-left" style="height: 100%; width: 100%;">
+          <ion-content>
+            <div style="background: var(--main-color);">
+              <ion-button fill="clear" (click)="backSlidePadre()" class="pt-3">
+                <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div class="parrafo" style="height: 230px">
+              <p class="text-parrafo-1">Datos personales</p>
+              <p class="titulo-parrafo mt-2">Compartir Datos</p>
+              <p class="text-parrafo-2">Comparte y brinda permisos de uso de tus datos para <br>realizar firma.</p>
+              <p class="text-parrafo-2" style="color: rgba(255, 255, 255, 0.885);">
+                <b>Se compartira: </b>
+                <span
+                  *ngFor="let d of datosEnStorage;index as i">{{d}}{{datosEnStorage.length-1!=i?(datosEnStorage.length-2==i?' y ':', '):'.'}}
+                </span>
+              </p>
+            </div>
+
+            <div class="p-3">
+
+              <div *ngFor="let campo of camposFormulario;index as i" class="m-0 p-0">
+                <ion-item lines="none">
+                  <ion-label position="floating" class="text-label">{{campo.nombre}} <br>{{campo.descripcion}}
+                  </ion-label>
+                  <ion-input id="telefonoF" [type]="campo.type" [(ngModel)]="campo.valor"
+                    (ionChange)='inputformInvalid()' required></ion-input>
+                </ion-item>
+                <hr class="line">
+              </div>
+
+            </div>
+            <ion-footer line="none" class="ion-no-border text-center ion-padding">
+              <ion-button class="boton-continuar" (click)="compartirData()"
+                [disabled]="formInvalid && camposFormulario.length!=0">Compartir</ion-button>
+            </ion-footer>
+          </ion-content>
+        </div>
+      </ion-slide>
+
+      <!-- VOTACION -->
+      <ion-slide *ngIf="dataFireBase.modesign == 'VOTES'">
+        <div class="row text-left" style="height: 100%; width: 100%;">
+
+          <ion-content>
+            <div style="background: var(--main-color);">
+              <ion-button fill="clear" (click)="backSlidePadre()" class="pt-3">
+                <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+              </ion-button>
+            </div>
+            <div class="parrafo">
+
+              <!--  <p class="text-parrafo-1">Appcuerdo</p> -->
+              <p class="titulo-parrafo mt-1">Votación Appcuerdo</p>
+              <p class="text-parrafo-2">Elige una de las siguientes opciones </p>
+              <!-- <p class="text-parrafo-2">{{titlesecurity}}</p> -->
+            </div>
+
+            <div class=" mt-2 px-2">
+              <ion-row>
+
+                <ion-col size="6" class="px-0" *ngFor="let v of optionsVote">
+                  <ion-card button="true" (click)="confirmarVoto(v)" style="--color:#0d59a3">
+                    <ion-card-header>
+                      <ion-avatar class="mx-auto mb-2">
+                        <img src="../../../assets/images/golpe-de-punos.png">
+                      </ion-avatar>
+                      <ion-card-subtitle>Appcuedo</ion-card-subtitle>
+                      <p style="font-size: 16px; font-weight: 500; color: black;" class="mb-2">{{v.opcion}}</p>
+                      <ion-card-subtitle>ID Opción</ion-card-subtitle>
+                      <small>{{v.opcionID}}</small>
+                    </ion-card-header>
+                  </ion-card>
+                </ion-col>
+
+              </ion-row>
+
+
+            </div>
+
+          </ion-content>
+        </div>
+      </ion-slide>
+
+      <!-- Ingresar FIRMA -->
+      <ion-slide *ngIf="signKey">
+        <div class=" text-left">
+
+          <div style="background: var(--main-color);width: 100%;">
+            <ion-button fill="clear" (click)="backSlidePadre()" class="pt-3">
+              <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+            </ion-button>
+          </div>
+          <app-signature-image (imageSignature)="imageSignature($event)"></app-signature-image>
+        </div>
+      </ion-slide>
+
+      <!-- Ingresar CODE -->
+      <ion-slide>
+        <div class="row text-left" style="height: 100%; width: 100%;">
+
+          <ion-content>
+            <div style="background: var(--main-color);">
+              <ion-button fill="clear" (click)="backSlidePadre()" class="pt-3">
+                <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+              </ion-button>
+            </div>
+            <div class="parrafo">
+
+              <p class="text-parrafo-1">Seguridad</p>
+              <p class="titulo-parrafo mt-2">Código de seguridad</p>
+              <p class="text-parrafo-2">Ingrese código de seguridad de documento</p>
+              <!-- <p class="text-parrafo-2">{{titlesecurity}}</p> -->
+            </div>
+
+            <div class="pt-4 px-4 mt-4">
+              <ion-item lines="none">
+                <ion-label position="floating" class="text-label">CODIGO</ion-label>
+                <ion-input id="codigoF" type="tel" #codigoF="ngModel" [(ngModel)]="codigo" required></ion-input>
+                <div class="md-errors-spacer" [hidden]="codigoF.valid || codigoF.untouched ">
+                  <div *ngIf="codigoF.errors && codigoF.errors.required">
+                    <span style="font-size: 12px; color: #eb445a;">
+                      <ion-icon name="alert-circle-outline"></ion-icon> Código es requerido
+                    </span>
+                  </div>
+                </div>
+              </ion-item>
+              <hr class="line">
+
+
+            </div>
+            <ion-footer line="none" class="ion-no-border text-center ">
+              <ion-button class="boton-continuar" (click)="validarCode()">Validar</ion-button>
+            </ion-footer>
+          </ion-content>
+        </div>
+      </ion-slide>
+
+      <!-- Ingresar PIN -->
+      <ion-slide>
+        <div class=" text-left" style="background: var(--secondary-color);width: 100%;height: 100%;">
+          <app-pin [data]="dataSlideValid" (backPage)="backSlidePadre()" (getClave)="getClave($event)"></app-pin>
+        </div>
+      </ion-slide>
+
+      <!-- Documento firmado-->
+      <ion-slide>
+
+        <div class="row text-left" style="height: 100%; width: 100%;">
+          <div class="pin" style="width: 100%;background: #38B6FF;">
+            <div class="text-center" style="margin-top: 10%;">
+              <img src="../../../assets/images/appcuerdoFirmado.png" class="my-1" style="width: 80%;">
+              <p style="font-size: 13px; color: rgba(255, 255, 255, 0.83);">El documento ha sido firmado <br> con éxito
+              </p>
+            </div>
+
+            <div class="ion-text-center">
+
+              <img src="../../../assets/images/logo.png" style="height: 110px; width: 110px; margin: auto;">
+              <p class="titulo-parrafo-pin mb-1 px-3">{{dataFireBase.filetitle}}</p>
+              <p class="text-parrafo-pin">{{dataFireBase.timestamp | date :'medium'}} </p>
+            </div>
+
+            <div class="ion-margin ion-text-center">
+              <ion-button (click)="fin()" class="ion-no-border"
+                style="--background: #257cbb;transform: translateY(13px);">
+                <span style="text-transform: capitalize;margin-left: 5px;">Aceptar</span>
+              </ion-button>
+            </div>
+
+
+
+          </div>
+
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+
+  </ion-content>

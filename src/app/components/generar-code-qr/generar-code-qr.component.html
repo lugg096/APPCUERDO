@@ -1,0 +1,52 @@
+<ion-content class="contetInicio" style="overflow-y: scroll;display: block;">
+
+  <div style="--color: var(--main-color);margin-bottom: 0;">
+    <!-- HEADER -->
+    <ion-icon slot="start" name="arrow-back" class="icon-nav-arrow "
+      style="color: var(--main-color); border-radius: 100%;position: absolute;z-index: 10;" (click)="closeModal()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title" style="color: var(--main-color);">{{title!=''?title:'QR'}}</ion-title>
+    </ion-item>
+  </div>
+
+
+  <!--   <div style="border-radius: 10px;box-shadow: var(--shadow-black-100);width: 90%;margin: auto;text-align: center;background: var(--secondary-color);padding: 20px 10px;">
+ -->
+  <div
+    style="border-radius: 10px;box-shadow: var(--shadow-black-300);width: 90%;margin: auto; margin-top:18px;text-align: center;padding-top: 5px; padding-bottom: 15px; background: var(--main-color)">
+
+
+    <img src="../../../assets/images/logoSello.png" style="width: 100px;height: auto;margin: auto;margin-top: 20px;">
+    <P style="font-size: 16px;color:#f7f8fbdc;margin: 10px 0;">{{subTitle}} </P>
+
+    <div #container>
+      <qrcode [qrdata]="codeQR" [width]="200" [errorCorrectionLevel]="'M'" [margin]="2"></qrcode>
+    </div>
+
+    <p style="font-size: 11px; padding: 0 40px;color: var(--black-100);margin-top: 10px;margin-bottom:0 ;">{{label1}}
+    </p>
+    <p style="font-size: 13px; padding: 0 40px;color: #fff;font-weight: 600">{{text1}}</p>
+
+    <p style="font-size: 11px; padding: 0 40px;color: var(--black-100);margin-top: 10px;margin-bottom:0 ;">{{label2}}
+    </p>
+    <p style="font-size: 13px; padding: 0 40px;color: #fff;font-weight: 600">{{text2}}</p>
+  </div>
+
+
+
+  <div style="display:block;text-align:center;margin-top: 30px;margin-bottom: 30px;">
+    <a class=" btn-main animate-pulse" style="background-color: var(--main-color);" (click)="copyText()">
+      <ion-icon name="documents-outline" style="color: #fff;font-size: 25px;transform: translateY(15px)"> </ion-icon>
+      <p style="color: var(--main-color);font-size: 11px;margin-top: 35px;text-align: center;font-weight: 600;">
+        Copiar</p>
+    </a>
+    <a class=" btn-main" (click)="compartirDireccion()">
+      <ion-icon name="share-social" style="color: var(--main-color);font-size: 25px;transform: translateY(15px)">
+      </ion-icon>
+      <p style="color: var(--main-color);font-size: 11px;margin-top: 35px;text-align: center;font-weight: 600;">
+        Compartir</p>
+    </a>
+  </div>
+
+</ion-content>

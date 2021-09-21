@@ -1,0 +1,210 @@
+<ion-content [fullscreen]="true">
+
+  <!-- TIPO DE CREACION -->
+  <ion-slides #slidesPadre pager="false" [options]="slideOptsOnboarding" style="height: 100%;">
+
+
+
+    <!-- Presentacion -->
+    <ion-slide class="ion-no-padding">
+      <div style="height: 100%; color: #2F3435;">
+        <div style="text-align: center;height: 70%;">
+          <img src="../../../assets/images/fondo.png" style="width: 100%;
+          height: 100%; object-fit: cover;">
+        </div>
+
+        <div style="position: absolute;top: 30%;width: 100%;">
+          <img src="../../../assets/images/logo-transparent.png" style="width: 145px;">
+        </div>
+
+        <p style="text-align: center;font-size: 11px; margin: 20px 20px;color: var(--text-color-2);">Genera una
+          identidad digital
+          descentralizada compatible con redes Blockchain basadas en Ethereum (Lacchain, Alastria, Quorum, Hyperledger
+          Besu, etc)
+        </p>
+
+        <div style="text-align: center">
+          <ion-button expand="block" (click)="nextSlidePadre()" class="button-01">
+            Crear identidad
+          </ion-button>
+        </div>
+
+      </div>
+    </ion-slide>
+
+    <!-- Tomar foto  -->
+    <ion-slide class="ion-no-padding" style="overflow-y: scroll;display: block;">
+      <div style=" padding-bottom: 5px;color: #2F3435;">
+
+        <div style="font-size: 25px;color:var(--main-color);position: absolute;width: 100%;top: 5%;">
+          <p style="text-align: center;"> PASO 1 </p>
+        </div>
+        <div style="text-align: center;margin-top: 10%;">
+          <img src="../../../assets/images/camera.png">
+        </div>
+
+
+        <p style="text-align: center; font-size: 23px;font-weight: 600; margin-bottom: 10px;">Captura de foto
+        </p>
+
+        <p style="text-align: center;font-size: 12px; margin: 0 40px;color: #8a8a8a;">
+          Usaremos su foto para identificar su indentidad
+        </p>
+
+        <div style="text-align: center">
+          <ion-button expand="block" (click)="procesarImagen()" class="button-01">
+            <ion-icon name="camera" style="font-size: 17px;margin-right: 5px;transform: translateY(-1px);"></ion-icon>
+            Capturar foto
+          </ion-button>
+          <a href="javascript:void(0)" class="cancel" (click)="backSlidePadre();">Regresar</a>
+        </div>
+
+
+      </div>
+    </ion-slide>
+
+    <!-- Data user -->
+    <ion-slide class="ion-no-padding" style="overflow-y: scroll;display: block;">
+      <div style=" padding-bottom: 5px;  height: 100%; color: #2F3435;margin-top: 10%;">
+        <p style="text-align: center; font-size: 23px;font-weight: 600; margin-bottom: 10px;">Datos personales
+        </p>
+        <p style="text-align: center;font-size: 12px; margin: 0 40px;color: #8a8a8a;">
+          Complete el formulario con sus datos personales
+        </p>
+
+        <div style=" color: #666666;padding: 23px;">
+          <form [formGroup]="dataUserForm">
+
+
+
+            <!-- ************************** -->
+            <ion-item lines="none" style="border-bottom: 0.5px solid #dddddd;" (click)="selectContry()">
+              <div>
+                <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">País</ion-label>
+                <div style="text-align: left;display: inline-block;width: 18%;margin: auto;">
+                  <img [src]="country.flagUrl" style="width: 55%;">
+                </div>
+                <div class="ml-0 pl-0" style=" display: inline-block;width: 82%;">
+                  <p style="margin: 0;color: #666666;font-size: 14px; ">{{country.name}}</p>
+                </div>
+              
+              </div>
+              <div style="position: absolute;right: 5px;bottom: 5px;">
+                <ion-icon name="chevron-down-outline" style="font-size: 23px;color: #a1a1a1;"></ion-icon>
+              </div>
+            </ion-item>
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.country.valid &&  !dataUserForm.controls.country.pending  && (dataUserForm.controls.country.dirty || submitAttempt)">
+              País es campo obligatorio
+            </p>
+
+            <!-- ************************** -->
+
+
+            <ion-item lines="none" style="margin-top:5px;border-bottom: 0.5px solid #dddddd;">
+              <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">Documento de identidad</ion-label>
+              <ion-input formControlName="dni" type="tel" placeholder="Documento de identidad"
+                style="color: #666666;font-size: 14px; "></ion-input>
+            </ion-item>
+
+
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.dni.valid &&  !dataUserForm.controls.dni.pending  && (dataUserForm.controls.dni.dirty || submitAttempt)">
+              DNI es campo obligatorio
+            </p>
+
+            <ion-item lines="none" style="margin-top:5px;border-bottom: 0.5px solid #dddddd;">
+              <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">Nombres</ion-label>
+              <ion-input placeholder="Nombre" type="text" formControlName="name"
+                style="color: #666666;font-size: 14px;"></ion-input>
+            </ion-item>
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.name.valid && (dataUserForm.controls.name.dirty || submitAttempt)">
+              Nombre es campo obligatorio
+            </p>
+
+            <ion-item lines="none" style="margin-top:5px;border-bottom: 0.5px solid #dddddd;">
+              <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">Apellidos</ion-label>
+              <ion-input placeholder="Apellido" type="text" formControlName="apellido"
+                style="color: #666666;font-size: 14px;"></ion-input>
+            </ion-item>
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.apellido.valid && (dataUserForm.controls.apellido.dirty || submitAttempt)">
+              Apellido es campo obligatorio
+            </p>
+
+            <ion-item lines="none" style="margin-top:5px;border-bottom: 0.5px solid #dddddd;">
+              <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">Email</ion-label>
+              <ion-input placeholder="Correo electrónico" type="text" formControlName="email"
+                style="color: #666666;font-size: 14px;"></ion-input>
+            </ion-item>
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.email.valid && (dataUserForm.controls.email.dirty || submitAttempt)">
+              Email es campo obligatorio
+            </p>
+
+            <ion-item lines="none" style="margin-top:5px;border-bottom: 0.5px solid #dddddd;">
+              <ion-label position="stacked" style="--color:#999999;font-size: 12px; ">Alias</ion-label>
+              <ion-input placeholder="Alias" type="text" formControlName="alias"
+                style="color: #666666;font-size: 14px;"></ion-input>
+            </ion-item>
+            <p style="font-size: 10px;color: #eb445a;text-align: left;margin-top: 3px;"
+              *ngIf="!dataUserForm.controls.alias.valid && (dataUserForm.controls.alias.dirty || submitAttempt)">
+              Alias es campo obligatorio
+            </p>
+          </form>
+
+        </div>
+
+
+        <div style="text-align: center">
+          <ion-button expand="block" (click)="saveData()" class="button-01">
+            Continuar
+          </ion-button>
+        </div>
+
+      </div>
+    </ion-slide>
+
+    <!-- Crear PIN -->
+    <ion-slide>
+      <div class=" text-left" style="background: var(--bfirma-primary);width: 100%;height: 100%;">
+        <app-pin [data]="dataSlideCreate" (backPage)="backSlidePadre()" (getClave)="getClave($event)"></app-pin>
+      </div>
+    </ion-slide>
+
+    <!-- Validar PIN -->
+    <ion-slide>
+      <div class=" text-left" style="background: var(--bfirma-primary);width: 100%;height: 100%;">
+        <app-pin [data]="dataSlideValidacion" (backPage)="backSlidePadre()" (getClave)="getClaveValid($event)">
+        </app-pin>
+      </div>
+    </ion-slide>
+
+    <!-- Identificacion lista-->
+    <ion-slide class="ion-no-padding">
+      <div style=" padding-bottom: 5px;  height: 100%; color: #2F3435;">
+
+        <div style="text-align: center;margin-top: 30%;width: 100%;margin: auto;">
+          <img src="../../../assets/images/autenticacion.png">
+        </div>
+
+        <p style="text-align: center; font-size: 23px;font-weight: 600; margin-bottom: 10px;margin-top: -10%;">
+          Identificación creada
+        </p>
+
+        <p style="text-align: center;font-size: 12px; margin: 0 40px;color: #8a8a8a;">Ahora puede firmar documentos de
+          forma segura.
+        </p>
+
+        <div style="text-align: center;margin-top: 10%;">
+          <ion-button expand="block" (click)="goInicio()" class="button-01">
+            Ir a incio
+          </ion-button>
+        </div>
+
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

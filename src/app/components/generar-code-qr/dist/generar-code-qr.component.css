@@ -1,0 +1,25 @@
+.icon-nav-arrow {
+  color: #F7F8FB;
+  font-size: 25px;
+  padding: 15px 20px;
+}
+
+.title {
+  text-align: center;
+  color: #F7F8FB;
+  font-size: 15px;
+}
+
+.btn-main {
+  background-color: #ffffff;
+  border-radius: 100%;
+  padding: 20px;
+  margin: 0 15px;
+  font-size: 23px;
+  height: 55px;
+  width: 55px;
+  padding: 0;
+  display: inline-block;
+  border: none;
+  box-shadow: var(--shadow-black-600);
+}

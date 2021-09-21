@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar class="toolbar">
+
+    <ion-avatar slot="start" (click)="myBackButton()"  class="text-center">
+      <ion-icon name="arrow-back-outline"  class="icon-return"></ion-icon>
+    </ion-avatar>
+
+    <ion-title class="ion-text-center title">Datos</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="color-fondo" mode="md">
+
+
+ <ion-item  lines="none" class="text-center">
+  <ion-avatar class="avatar-profile mx-auto mt-3">
+     <img  [src]="_storage.datos.PHOTO"  (click)="verFoto(_storage.datos.PHOTO)">
+  <ion-badge color="danger" (click)="verFoto(_storage.datos.PHOTO)" style="height: 38px;width: 38px; transform: translateY(-40px); margin-left: 90px ;background:var(--main-color) ;border-radius: 50px;"> 
+     <ion-icon name="eye" style="font-size: 20px; margin-top:6px;color: white;"></ion-icon></ion-badge>
+   </ion-avatar>
+  </ion-item>
+
+
+  <ion-item  lines="none">
+
+    <ion-title class="sub-title" slot="start">
+      Datos personales
+    </ion-title>
+    <ion-button size="small" class="button-metadata text-rigth"> <ion-icon name="code-working-outline" class="mx-1"></ion-icon> MetaData</ion-button>
+  </ion-item>
+
+  
+
+  <div class="ion-padding" style="background: white;">
+
+<ion-item *ngIf="_storage.datos.NAME!=''">
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="person-outline" style="font-size: 20px;margin-left: 15px; margin-top:10px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+    <ion-label class="datos-campo">Nombre</ion-label>
+    <ion-label class="datos-label">{{_storage.datos.NAME}}</ion-label>
+  </ion-label>
+
+</ion-item>
+
+
+<ion-item *ngIf="_storage.datos.DNI!=''">
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="card-outline" style="font-size: 20px;margin-left: 15px; margin-top:10px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+    <ion-label class="datos-campo">DNI</ion-label>
+    <ion-label class="datos-label">{{_storage.datos.DNI}}</ion-label>
+  </ion-label>
+</ion-item>
+
+<ion-item *ngIf="_storage.datos.EMAIL!=''">
+  <ion-avatar slot="start" class="ion-no-padding">
+
+    <ion-icon name="mail-outline" style="font-size: 20px;margin-left: 15px; margin-top:10px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+    <ion-label class="datos-campo">Email</ion-label>
+    <ion-label class="datos-label">{{_storage.datos.EMAIL}}</ion-label>
+  </ion-label>
+</ion-item>
+
+<ion-item>
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="file-tray-stacked-outline" style="font-size: 20px;margin-left: 15px; margin-top:10px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+    <ion-label class="datos-campo">SignBox</ion-label>
+    <ion-label class="datos-label ion-text-wrap">{{_storage.datos.SINBOX_ID}}</ion-label>
+  </ion-label>
+</ion-item>
+
+
+
+<ion-item button="true" (click)="eliminarDatos()">
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="power-outline" style="font-size: 20px;margin-left: 15px; margin-top:10px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0" >
+    <ion-label class="datos-campo">Eliminar perfil</ion-label>
+    <ion-label class="datos-label ion-text-wrap">Se eliminará todos los datos de Appcuerdo en su dispositivo.</ion-label>
+  </ion-label>
+</ion-item>
+
+  </div>
+
+
+</ion-content>

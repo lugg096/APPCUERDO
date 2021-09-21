@@ -1,0 +1,7 @@
+{
+  "name": "Appcuerdo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

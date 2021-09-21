@@ -1,0 +1,101 @@
+/* Cabecera */
+
+.button-perfil{
+    --background: var(--main-color);
+    text-align: center;
+}
+
+.tab-button{
+    color: white;
+}
+.text-tab{
+    font-size: 10px;
+}
+.fab-button-scan{
+    --background:  var(--main-color);
+    --color:#fff;
+      width: 65px;
+      height: 65px;
+      transform: translateY(-2px);
+}
+
+
+
+.icon-perfil{
+    font-size: 38px;
+    transform: translateY(-2px);
+   padding-left: 10px;
+}
+
+
+.toolbar{
+    background: var(--main-color);
+     color: white;
+     height: 50px;
+}
+
+.title{
+    transform: translateY(-8px);
+    margin-left: 52px;
+    font-size: 17px;
+}
+
+/* Cuerpo */
+.color-fondo{
+    --background: var(--bfirma-fondo);
+}
+
+
+/* Documentos */
+.tipo{
+    color: var(--bfirma-letra-suave);
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.nombre{
+    color: var(--bfirma-tertiary);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.autor{
+    color: var(--bfirma-letra-suave);
+    font-size: 12px;
+}
+
+.fecha{
+  font-size: 10px;
+  color: var(--bfirma-letra-suave);
+}
+
+.header-border {
+    border: 1px solid #3b3b3b1c;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+
+
+ion-fab[vertical="bottom"][horizontal="end"] ion-fab-list {
+    right: 0;
+    align-items: flex-end;
+  }
+  
+  ion-fab-button[size="small"] {
+    --size: 35px;
+  }
+  
+  .custom-fab {
+    display: flex;
+    align-items: center;
+  }
+  ion-fab[horizontal="start"] .custom-fab {
+    flex-direction: row-reverse;
+  }
+  .custom-fab ion-button {
+    --background: rgba(0, 0, 0, 0.802);
+    --height: 25px;
+    text-transform: none;
+}

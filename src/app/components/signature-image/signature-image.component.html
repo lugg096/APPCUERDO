@@ -1,0 +1,23 @@
+
+<div>
+    <div class="parrafo" style=" padding-top: 30px;">
+      <p class="text-parrafo-1">Seguridad</p>
+      <p class="titulo-parrafo mt-2">Firma electrónica</p>
+      <p class="text-parrafo-2">Ingresa tu firma electrónica</p>
+    </div>
+  
+  <ion-toolbar style="--background: #fff;padding-left: 23px;">
+      <ion-button class="boton-icon"  (click)="undo()"> <ion-icon name="refresh-outline"></ion-icon></ion-button>
+      <ion-button class="boton-icon"  (click)="clear()"> <ion-icon name="trash"></ion-icon></ion-button>
+      <ion-button  class="boton-firma" [disabled]="isCanvasBlank()" (click)="save()">Continuar</ion-button>
+  </ion-toolbar>
+  
+  <div class="pt-2 px-4 ">
+    <div class="signature-pad">
+      <div>
+        <canvas class="signature-pad-canvas" #canvas width="900" height="400" style="touch-action: none;"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>

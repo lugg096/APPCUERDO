@@ -1,0 +1,218 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar">
+    <ion-avatar slot="start" (click)="myBackButton()" class="text-center">
+      <ion-icon name="arrow-back-outline" class="icon-header"></ion-icon>
+    </ion-avatar>
+    <ion-title class="ion-text-center title">Documento</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content   style="--background: var(--color-background-2);" >
+  <div class="parrafo pt-0 mt-0">
+    <p class="text-right my-0 py-0" style="font-size: 12px;color: rgba(255, 255, 255, 0.755);">
+      <small>{{data.timestamp | date :'mediumDate'}}</small></p>
+    <p class="text-parrafo-1 mt-0 mb-1">
+      {{cancel?'Documento cancelado':data.filestatus}} <ion-icon
+        [name]="data.filestatuscode=='TERM'?'checkmark-circle':(data.filestatuscode=='PROC'?'sync':'close-circle')"
+        style="font-size: 18px;transform: translateY(6px);"></ion-icon>
+    </p>
+    <p class="titulo-parrafo mt-0 mb-1">{{data.filetitle}}</p>
+    <p class="text-parrafo-2 mb-0">{{dataFire.filename}} {{dataFire.filesize}} bytes</p>
+  </div>
+
+
+
+
+
+  <ion-slides #slides [options]="slideOpts">
+
+    <!--  VISTA DE DOCUMENTO -->
+    <ion-slide>
+      <div *ngIf="!load" class="row text-left identificacion" style="height: 100%; width: 100%; padding-bottom: 20px;">
+        <ion-item style="width: 100%;" lines="none">
+          <ion-avatar slot="start" class="ion-no-padding text-center mt-2" style="height: 43px; width: 43px;">
+            <img [src]="dataFire.creatoricon" style="height: 43px; width: 43px; margin: auto;">
+          </ion-avatar>
+          <ion-label style="line-height: 16px;">
+            <small style="color: darkgrey;">Creador</small>
+            <ion-row class=" ion-no-padding ">
+              <ion-col class="ion-no-padding">
+                <b style="font-size: 13px; color: rgba(0, 0, 0, 0.768);">{{dataFire.creatorname}}</b>
+              </ion-col>
+            </ion-row>
+          </ion-label>
+        </ion-item>
+
+        <div class="row" style="width: 100%;">
+
+          <div class="col-8 pr-0" style="text-align: center;margin-top: 15px;">
+            <img [src]="path"
+              style="padding-left: 10px;width: 238px;filter: drop-shadow(1px 3px 6px rgb(174, 174, 174))">
+          </div>
+
+          <div class="col-4 mx-0 px-0 text-lef" style="transform: translateX(10px);">
+            <ion-fab class="mt-3 mb-1 mx-2" horizontal="end" style=" font-size: 13px; 
+            color: var(--text-color-2)">
+              <ion-fab-button style="--background: var(--main-color)">Ver</ion-fab-button>
+              <ion-fab-list side="bottom">
+                <ion-button target="_blank" [href]="'http://appcuerdo.com/original/'+pathDoc" *ngIf="data.filestatuscode!='PROC'"
+                  style="text-transform: capitalize;--background: var(--main-color);">Pre firmado</ion-button>
+                <ion-button target="_blank" [href]="'http://appcuerdo.com/files/'+pathDoc" *ngIf="data.filestatuscode=='PROC'"
+                  style="text-transform: capitalize;--background: var(--main-color);">Pre firmado</ion-button>
+                <ion-button target="_blank" [href]="'http://appcuerdo.com/filesout/sign_'+pathDoc"
+                  *ngIf="typeDoc=='PDF' && data.filestatuscode=='TERM'"
+                  style="text-transform: capitalize;--background: var(--main-color);">Post firmado</ion-button>
+                <ion-button target="_blank" [href]="'http://appcuerdo.com/filesout/cred_'+pathDoc" *ngIf="data.filestatuscode=='TERM'"
+                  style="text-transform: capitalize;--background: var(--main-color);">Credencial</ion-button>
+              </ion-fab-list>
+            </ion-fab>
+
+            <p class="mb-1 mx-2" style=" font-size: 15px;
+          color: var(--main-color); margin-top: 80px;">
+              {{listDataDoc.length}} Firmas <ion-icon
+                style=" color: var(--main-color);font-size: 22px; transform: translateY(3px);" name="create-outline">
+              </ion-icon>
+            </p>
+
+            <p class="mt-1 mb-1 mx-2" style="font-size: 11px;
+          color: var(--text-color-2)" *ngFor="let d of listDataDoc_aux">
+              <ion-icon style="font-size: 16px;transform: translateY(4px);color: var(--secondary-color);"
+                name="checkmark-circle">
+              </ion-icon> {{name(d.name)}}.
+            </p>
+
+
+            <p class="mt-0 mb-1 mx-2 ml-5" style="font-size: 20px;
+            color: var(--text-color-2)" *ngIf="listDataDoc.length>=4">...</p>
+
+
+            <p style="line-height:0.5em;color: var(--main-color);" class="text-center" (click)="nextSlide()">
+              <ion-icon name="arrow-undo-outline" style="transform: rotate(180deg);font-size: 37px;"></ion-icon><br>
+              <span style="font-size: 11px">Desliza</span>
+
+            </p>
+
+          </div>
+        </div>
+        <div *ngIf="cancel" style="width: 100%;" class="text-center">
+          <img src="../../../assets/images/cancelado.png" style="height: auto;width: 220px;">
+        </div>
+      </div>
+
+      <div *ngIf="load" class="row text-left identificacion" style="height: 100%; width: 100%;">
+
+        <ion-item style="width: 100%;" lines="none">
+          <ion-avatar slot="start" style="height: 45px; width: 45px;">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+
+
+        <ion-item style="width: 100%;" lines="none">
+          <ion-skeleton-text animated style="width: 225px; height: 280px;margin-top: 10px;margin-bottom: 30px"
+            slot="start"></ion-skeleton-text>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </div>
+
+
+    </ion-slide>
+
+    <!-- VISTA DE USUARIOS FIRMADOS -->
+    <ion-slide>
+      <div class="row text-left identificacion" style="height: 100%; width: 100%; padding-bottom: 20px;">
+        <ion-item style="--background: #fff;width: 100%;margin-bottom: 12px; " lines="none">
+          <ion-avatar slot="start" class="ion-no-padding text-center mt-2" style="height: 43px; width: 43px;">
+            <img [src]="dataFire.creatoricon" style="height: 43px; width: 43px; margin: auto;">
+          </ion-avatar>
+          <ion-label style="line-height: 16px;">
+            <b style="font-size: 13px; color: rgba(0, 0, 0, 0.768);"><span
+                style="font-size: 16px;">{{listDataDoc.length}}
+              </span>{{listDataDoc.length==1?'Usuario firmó':'Usuarios firmaron'}} el documento </b>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngFor="let d of listDataDoc" style="width: 100%;" (click)="verUser(d)">
+          <ion-avatar slot="start" class="ion-no-padding" style="height: 43px; width: 43px;">
+            <img [src]="'data:image/jpg;base64,'+d.photo" style="height: 43px; width: 43px; margin: auto;">
+          </ion-avatar>
+          <ion-label style="line-height: 17px;">
+            <ion-row class="ion-no-margin ion-no-padding">
+              <ion-col class="ion-no-margin ion-no-padding">
+                <b style="font-size: 15px; color: rgba(0, 0, 0, 0.768);">{{d.name}}</b>
+              </ion-col>
+              <ion-col class="ion-no-margin ion-no-padding">
+                <p class="text-right my-0 py-0" style="font-size: 11px;color: darkgrey;"><small
+                    style="color: darkgrey;">{{d.timestamp | date :'mediumDate'}}</small></p>
+              </ion-col>
+            </ion-row>
+
+            <small style="color: darkgrey;font-size: 11px;">DID: {{d.did}}</small>
+
+          </ion-label>
+        </ion-item>
+
+
+
+      </div>
+    </ion-slide>
+
+
+  </ion-slides>
+
+</ion-content>
+
+
+
+<ion-footer line="none" class="ion-no-border text-center" *ngIf="!cancel">
+  <div class="row px-3 fondo-opciones" style="height: 91px;">
+    <div class="col-3 px-0 py-0">
+      <ion-tab-button (click)="invitar()" [class.optionColor]="data.filestatuscode=='TERM'"
+        [disabled]="data.filestatuscode=='TERM'">
+        <ion-icon class="icon-tab-button" name="person-add"></ion-icon>
+        <ion-label class="icon-tab-label">Invitar a <br> firmar</ion-label>
+      </ion-tab-button>
+    </div>
+    <div class="col-3 px-0 py-0">
+      <ion-tab-button (click)="compartir()" [class.optionColor]="data.filestatuscode=='PROC'"
+        [disabled]="data.filestatuscode=='PROC'">
+        <ion-icon class="icon-tab-button" name="share-social"></ion-icon>
+        <ion-label class="icon-tab-label">Compartir <br> documento </ion-label>
+      </ion-tab-button>
+    </div>
+    <div class="col-3 px-0">
+      <ion-tab-button (click)="verFirma()">
+        <ion-icon class="icon-tab-button" name="qr-code-outline"></ion-icon>
+        <ion-label class="icon-tab-label">Firma <br> electrónica</ion-label>
+      </ion-tab-button>
+    </div>
+    <div class="col-3 px-0">
+      <ion-tab-button target="_blank" [href]="'https://explorer.lacchain.net/tx/'+data.lacchain_tx">
+        <ion-icon class="icon-tab-button" name="pencil"></ion-icon>
+        <ion-label class="icon-tab-label"> Credencial <br> blockchain</ion-label>
+      </ion-tab-button>
+    </div>
+  </div>
+</ion-footer>

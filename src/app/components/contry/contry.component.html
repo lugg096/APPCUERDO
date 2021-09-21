@@ -1,0 +1,32 @@
+
+<ion-content class="contetInicio" style="overflow-y: scroll;display: block;">
+<div style="--color: var(--main-color);margin-bottom: 0;">
+  <!-- HEADER -->
+  <ion-icon slot="start" name="arrow-back" class="icon-nav-arrow "
+    style="color: var(--main-color); border-radius: 100%;position: absolute;z-index: 10;" (click)="closeModal(country)">
+  </ion-icon>
+  <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+    <ion-title class="title" style="color: var(--main-color);">Paises</ion-title>
+  </ion-item>
+</div>
+
+
+
+
+<!-- Searchbar with danger color -->
+<ion-searchbar color="primary" placeholder="Buscar" (ionChange)="filter($event)"></ion-searchbar>
+
+
+<ion-list>
+  <ion-radio-group [value]="country.flag">
+    <ion-item *ngFor="let item of countries | filtroCountry: textFilter" (click)="closeModal(item)">
+      <ion-label>{{item.name}}</ion-label>
+      <ion-thumbnail slot="end" style="margin: 0;padding: 0;">
+        <ion-img [src]="item.flagUrl" style="width: 60%;height: auto;margin-top: 25%;"></ion-img>
+      </ion-thumbnail>
+      <ion-radio slot="start" [value]="item.flag" mode="ios"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+</ion-list>
+</ion-content>

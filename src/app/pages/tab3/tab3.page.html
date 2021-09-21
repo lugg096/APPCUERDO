@@ -1,0 +1,110 @@
+<ion-header class="ion-no-border" style="background:var(--main-color) ;" >
+  <div style="margin-bottom: 0;">
+    <!-- HEADER -->
+    <ion-icon slot="start" name="arrow-back" class="icon-nav-arrow"
+      style="color: #fff; position: absolute;z-index: 10; padding: 20px;padding-top: 0px;"
+      (click)="goInicio()">
+    </ion-icon>
+    <p style="text-align: center;margin: 10px;color: #fff;">Perfil</p>
+  </div>
+</ion-header>
+
+
+<ion-content class="color-fondo" mode="md">
+  <div class="container">
+    <ion-avatar class="text-center">
+      <img [src]="_storage.datos.PHOTO" (click)="verFoto(_storage.datos.PHOTO)" class="profile-img"> 
+     </ion-avatar>
+    <div class="content">
+      <div class="sub-content">
+        <ion-label class="ion-text-wrap">
+          <h6 class="name-message">{{_storage.datos.NAME}}</h6>
+          <ion-text>
+            <small class="text-message">DNI {{_storage.datos.DNI}}</small>
+          </ion-text>
+  
+        </ion-label>
+      
+      </div>
+
+
+      <div class="wrapper" style="text-align: center">
+        <h3>{{_storage.datos.DNI}}</h3>
+        <div style="text-align: center;padding-left: 40px;padding-right: 40px;margin-top: 10px;">
+            <h2 style="font-size: 15px;color: white; margin-bottom: -23px;">Dirección</h2>
+          <div style="border-top: 30px solid var(--main-color);">
+            <qrcode [qrdata]="addres" [width]="130"  [margin]="2"></qrcode>
+           
+          </div>
+           
+          <span> <b>{{codeQRmin }}</b></span>
+          <p class="compartir-did" (click)="compartirDireccion()">Compartir</p>
+
+     
+       </div>
+      </div>
+     <!--  <div style="text-align: center;margin-top: 10px;">
+        <a class=" btn-main" (click)="compartirDireccion()">
+          <ion-icon name="share-social" style="color: var(--main-color);font-size: 22px;transform: translateY(12px)">
+          </ion-icon>
+        
+        </a>
+      </div> -->
+    
+    </div>
+  </div>
+
+
+  <ion-item lines="none" style="margin-top: 20px;" (click)="verQR('Código QR',_storage.datos.DID,'DID')">
+    <ion-avatar slot="start" class="text-center" >
+      <ion-icon name="cube" style="font-size: 24px;margin-left: 18px;margin-top:5px;color:var(--main-color)"></ion-icon>
+    </ion-avatar>
+    <ion-label class="p-0 pt-2">
+        <b style="font-size: 14px;"> DID</b> <br>
+        <small style="color: darkgrey;font-size: 14px;">Identidad digital decentralizada</small>
+    </ion-label>
+    <div style="color: darkgrey;text-transform: capitalize;" class="pt-2">
+      <span  style="font-size: 13px;"> </span> <ion-icon style="font-size: 25px; transform: translateY(8px);" name="chevron-forward-outline"></ion-icon>
+    </div>
+</ion-item>
+
+<ion-item lines="none" (click)="verQR('Código QR',_storage.datos.publicKey,'Llave pública')">
+  <ion-avatar slot="start" class="text-center" >
+    <ion-icon name="key" style="font-size: 24px;margin-left: 18px;margin-top:5px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+      <b style="font-size: 14px;"> Llave pública</b> <br>
+      <small style="color: darkgrey;font-size: 14px;">Identidad digital decentralizada</small>
+  </ion-label>
+  <div style="color: darkgrey;text-transform: capitalize;" class="pt-2">
+    <span  style="font-size: 13px;"> </span> <ion-icon style="font-size: 25px; transform: translateY(8px);" name="chevron-forward-outline"></ion-icon>
+  </div>
+</ion-item>
+
+<ion-item lines="none"  [routerLink]="['perfil-data']">
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="person" style="font-size: 24px;margin-left: 18px;margin-top:5px;color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0">
+      <b style="font-size: 14px;"> Datos</b> <br>
+      <small style="color: darkgrey;font-size: 14px;">Datos personales</small>
+  </ion-label>
+  <div style="color: darkgrey;text-transform: capitalize;" class="pt-2">
+    <span  style="font-size: 13px;"> </span> <ion-icon style="font-size: 25px; transform: translateY(8px);" name="chevron-forward-outline"></ion-icon>
+  </div>
+</ion-item>
+
+<ion-item lines="none"  routerLink="/app/perfil-biocard">
+  <ion-avatar slot="start" class="ion-no-padding">
+    <ion-icon name="shield-checkmark" style="font-size: 24px;margin-left: 18px;transform: translateY(-8px);color:var(--main-color)"></ion-icon>
+  </ion-avatar>
+  <ion-label class="p-0 pb-4">
+      <b style="font-size: 14px;"> BIOCard Virtual</b> <br>
+      <small style="color: darkgrey;font-size: 14px;">Mostrar los QR de BIOCard</small>
+  </ion-label>
+  <div style="color: darkgrey;text-transform: capitalize;" class="pt-2">
+    <span  style="font-size: 13px;"> </span> <ion-icon style="font-size: 25px; transform: translateY(-12px);" name="chevron-forward-outline"></ion-icon>
+  </div>
+</ion-item>
+
+</ion-content>
