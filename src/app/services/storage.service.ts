@@ -62,6 +62,8 @@ export class StorageService {
 
   async validarAuth(): Promise<boolean> {
     let data = await this.getLocalStorage('DATA');
+    console.log('DATA..............1',data);
+    
     if (data) return Promise.resolve(true);
     return Promise.resolve(false);
   }
